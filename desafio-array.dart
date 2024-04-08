@@ -14,23 +14,28 @@ void main(List<String> args) {
 
   int escolha = -1;
 
-  while (escolha != 3) {
-    print("Escolha o numero da opção desejada:\n1-Ver dados dos pacientes\n2-Cadastrar paciente\n3-Sair");
-    var escolha = int.parse(stdin.readLineSync()!);
-
-    switch (escolha) {
+  while (escolha != 4) {
+    print(
+        "Escolha o numero da opção desejada:\n1-Ver dados dos pacientes\n2-Cadastrar paciente\n3-Excluir paciente\n4-Sair");
+    var input = stdin.readLineSync();
+    if (input != null) {
+      escolha = int.parse(input);
+      switch (escolha) {
         case 1:
-            dadosLista(pacientes);
-            break;
+          dadosLista(pacientes);
+          break;
         case 2:
-            var nome = stdin.readLineSync() ?? -1;
-            var idade = stdin.readLineSync() ?? -1;
-            var profissao = stdin.readLineSync() ?? -1;
-            var UF = stdin.readLineSync() ?? -1;
-
-            break;
+          cadastraPaciente(pacientes);
+          break;
+        case 3:
+          excluiPaciente(pacientes);
+          break;
+        case 4:
+          print("Saindo do sistema.");
+          break;
         default:
-            print("Insira um valor válido");
+          print("Insira um valor válido");
+      }
     }
   }
 }
@@ -61,8 +66,46 @@ void dadosLista(List<String> pacientes) {
         : pacienteEstado[dadosPaciente[3]] =
             (pacienteEstado[dadosPaciente[3]]! + 1);
   }
-
+  print("----------------------//-------------------");
   print("Pacientes com mais de 20 anos: ${maiores.join(', ')}\n");
   print("Numero de pacientes por profissão: ${pacienteProfissao}\n");
   print("Numero de pacientes que moram em SP: ${pacienteEstado['SP']}\n");
+  print("----------------------//-------------------");
 }
+
+List<String> cadastraPaciente(List<String> pacientes) {
+
+  print("\nInforme o nome do paciente: ");
+  var nome = stdin.readLineSync();
+  nome = nome == "" ? "Sem Nome": nome; 
+
+  print("\nInforme a idade do paciente: ");
+  var idade = stdin.readLineSync();
+    idade = idade == "" ? "0": idade; 
+
+  print("\nInforme a profissão do paciente: ");
+  var profissao = stdin.readLineSync();
+    profissao = profissao == "" ? "Sem Profissão": profissao; 
+
+  print("\nInforme a UF do paciente: ");
+  var UF = stdin.readLineSync();
+    UF = UF == "" ? "Sem UF": UF; 
+
+  pacientes.add("${nome}|${idade}|${profissao}|${UF}");
+
+  return pacientes;
+
+}
+
+// função para exclusão de paciente
+List<String> excluiPaciente(List<String> pacientes) {
+  print("Informe o nome do paciente que deseja excluir: ");
+  var nome = stdin.readLineSync();
+  nome = nome == "" ? "Sem Nome": nome; 
+
+  pacientes.removeWhere((paciente) => paciente.contains(nome as Pattern));
+
+  return pacientes;
+}
+
+// 
