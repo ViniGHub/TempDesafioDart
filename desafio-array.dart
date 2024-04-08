@@ -9,7 +9,10 @@ void main(List<String> args) {
     'Gustavo Silva|40|Desenvolvedor|CE',
     'Sandra Silva|40|Desenvolvedor|MG',
     'Regina Verne|35|Dentista|MG',
-    'João Rahman|55|Jornalista|RJ'
+    'João Rahman|55|Jornalista|RJ',
+    'Lucas Caetano|19|Estudante|SP',
+    'Vinicius Rodrigues|20|Estudante|SP',
+    "Kaua Vieira|21|Suporte|SP"
   ];
 
   int escolha = -1;
